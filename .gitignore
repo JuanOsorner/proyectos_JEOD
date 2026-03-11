@@ -25,7 +25,11 @@ __pycache__/
 *.xlsx
 *.xls
 
-# --- Archivos de Java 
+# --- Archivos de Java
+
+# IDE IntelliJ
+.idea/
+*.iml
 
 # Compilados
 *.class
