@@ -1,1 +1,1 @@
-Aqui nada aun
+Aqui vamos a añadir el consumo de APIs externas y toda la logica para ello.
