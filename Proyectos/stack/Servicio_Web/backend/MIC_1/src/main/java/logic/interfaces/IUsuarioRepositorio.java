@@ -1,6 +1,6 @@
 package logica.interfaces;
 
-import data.entities.ModeloUsuario;
+import data.models.ModeloUsuario;
 import java.sql.SQLException;
 import java.util.List;
 
