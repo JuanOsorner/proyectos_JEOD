@@ -1,0 +1,2 @@
+En este folder podriamos manejar funcionabilidades extras que se usan de manera general para cada
+funcionabilidad.
