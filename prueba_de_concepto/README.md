@@ -13,29 +13,6 @@ El proyecto fue construido bajo principios de Domain-Driven Design (DDD) e imple
 - Base de Datos: MySQL / SQL Server.
 - Patrones de Diseño: Dependency Injection, Unit of Work, Repository Pattern, Mediator (Event Bus).
 
-### Estructura de Directorios
-
-/ (Raíz del Proyecto)
-├── backend/
-│ ├── compartido/
-│ │ ├── bus_eventos/ # Mediador para comunicación asíncrona entre módulos
-│ │ ├── config/ # Gestión de variables de entorno y conexión a DB
-│ │ ├── infraestructura/ # Modelos globales (Shared Kernel) como LogErrorNomina
-│ │ └── utilidades/ # Scripts transversales (ej. enmascaramiento JSON)
-│ ├── funcionalidades/
-│ │ └── ahe/ # Slice: Análisis de Horas Extras
-│ │ ├── Application/ # Orquestación y casos de uso
-│ │ ├── Domain/ # Entidades y reglas de negocio puras
-│ │ ├── Infrastructure/ # Adaptadores (Lector CSV en memoria, Repositorio SQL)
-│ │ └── endpoints.py # Controladores HTTP (FastAPI)
-│ ├── .env # Credenciales y configuración local
-│ ├── main.py # Punto de entrada de la aplicación y configuración CORS
-│ └── requirements.txt # Dependencias de Python
-└── frontend/
-├── index.html # Interfaz de usuario (Drag & Drop)
-├── app.js # Lógica de cliente y peticiones HTTP
-└── styles.css # Estilos y micro-interacciones
-
 ## Requisitos Previos
 
 - Python 3.10 o superior.
