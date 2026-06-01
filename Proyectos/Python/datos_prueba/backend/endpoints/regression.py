@@ -19,5 +19,8 @@ def bitcoin_regression():
     return {
         "data_points": result["samples"],
         "intercept": result["intercept"],
-        "slope": result["slope"]
+        "slope": result["slope"],
+        "x": data["x"],
+        "y": data["y"],
+        "predictions": result["predictions"]
     }
