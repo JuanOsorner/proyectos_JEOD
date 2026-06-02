@@ -32,12 +32,12 @@ class RegresionLineal:
         ) @ A.T @ y
         # beta es nuestro vector de parametros de la recta
 
+        intercept = float(beta[0])
+        slope = float(beta[1])
+
         predictions = (
             intercept + slope * x
         ).tolist()
-
-        intercept = float(beta[0])
-        slope = float(beta[1])
 
         return {
             "samples": n,

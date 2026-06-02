@@ -12,21 +12,30 @@
 
 <body>
 
+    <div class="background"></div>
+    <div class="background-overlay"></div>
+
     <div class="container">
 
-        <h1>Regresión Lineal Bitcoin</h1>
+        <div id="hero">
 
-        <p>
-            Obtiene los últimos datos de Bitcoin,
-            calcula mínimos cuadrados y visualiza
-            la tendencia encontrada.
-        </p>
+            <h1>Regresión Lineal Bitcoin</h1>
 
-        <button id="load-data-btn">
-            Cargar Datos
-        </button>
+            <p>
+                Obtiene los últimos datos de Bitcoin,
+                calcula mínimos cuadrados y visualiza
+                la tendencia encontrada.
+            </p>
 
-        <section id="summary">
+            <button id="load-data-btn">
+                Cargar Datos
+            </button>
+
+        </div>
+
+        <section id="summary" class="hidden-section">
+
+            
 
             <h2>Resumen</h2>
 
@@ -36,15 +45,29 @@
 
         </section>
 
-        <section id="chart-section">
+        <section id="metrics-section" class="hidden-section">
 
-            <h2>Gráfica</h2>
+            <h2>Métricas</h2>
 
-            <canvas id="bitcoin-chart"></canvas>
+            <div id="metrics-container">
+
+                Esperando datos...
+
+            </div>
 
         </section>
 
-        <section id="table-section">
+        <section id="chart-section" class="hidden-section">
+
+            <h2>Gráfica</h2>
+
+            <div class="chart-container">
+                <canvas id="bitcoin-chart"></canvas>
+            </div>
+
+        </section>
+
+        <section id="table-section" class="hidden-section">
 
             <h2>Datos</h2>
 

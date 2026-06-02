@@ -1,30 +1,283 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fa;
+/* =========================
+   RESET
+========================= */
+
+* {
     margin: 0;
-    padding: 40px;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.container {
-    max-width: 1200px;
-    margin: auto;
+/* =========================
+   BODY
+========================= */
+
+body {
+    font-family: Inter, Segoe UI, sans-serif;
+    min-height: 100vh;
+    color: white;
+    background: linear-gradient(
+        -45deg,
+        #0f172a,
+        #1e293b,
+        #0f766e,
+        #2563eb
+    );
+    background-size: 400% 400%;
+    animation: gradientFlow 18s ease infinite;
+    /* Controlamos el overflow de manera dinámica desde JS */
+    overflow-x: hidden;
+    overflow: hidden;
 }
+
+/* =========================
+   FONDO ANIMADO
+========================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: radial-gradient(
+        circle at 20% 20%,
+        rgba(0,255,255,.15),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 80% 30%,
+        rgba(59,130,246,.15),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 50% 80%,
+        rgba(16,185,129,.15),
+        transparent 30%
+    );
+    animation: floatBackground 20s linear infinite;
+}
+
+.background-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    backdrop-filter: blur(120px);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 50px 30px;
+}
+
+/* =========================
+   TITULOS Y TEXTO
+========================= */
 
 h1 {
     text-align: center;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    animation: fadeUp 1s ease;
 }
+
+p {
+    text-align: center;
+    opacity: .9;
+    margin-bottom: 25px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* =========================
+   BOTON
+========================= */
 
 button {
-    padding: 12px 20px;
+    display: block;
+    margin: auto;
+    border: none;
+    outline: none;
+    padding: 16px 32px;
+    border-radius: 14px;
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 16px;
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        filter .3s ease;
+    box-shadow: 0 10px 30px rgba(37,99,235,.4);
 }
 
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(37,99,235,.5);
+    filter: brightness(1.1);
+}
+
+button:active {
+    transform: scale(.97);
+}
+
+/* =========================
+   HERO (ESTABILIZADO Y ANIMADO)
+========================= */
+
+#hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+    transition: min-height 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#hero h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    transition: font-size 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Estado activo tras la carga de datos */
+.hero-loaded {
+    min-height: 40vh !important;
+}
+
+.hero-loaded h1 {
+    font-size: 2.5rem;
+}
+
+/* =========================
+   SECCIONES (CONTENEDORES BASE)
+========================= */
+
 section {
+    /* Mantenemos tus estilos visuales base */
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 25px;
+    transition:
+        transform .3s ease,
+        border .3s ease;
+}
+
+section:hover {
+    transform: translateY(-4px);
+    border: 1px solid rgba(255,255,255,.25);
+}
+
+/* =========================
+   ESTADOS DE VISIBILIDAD (SOPORTE DE ANIMACIÓN LUJO)
+========================= */
+
+/* display: none rompe las transiciones. 
+   Usamos max-height, opacity y transform de forma controlada. */
+.hidden-section {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(40px);
+    overflow: hidden;
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border: none;
+    backdrop-filter: none;
+    transition: 
+        max-height 0s 0.8s,
+        opacity 0.6s ease,
+        transform 0.6s ease,
+        margin 0.6s ease,
+        padding 0.6s ease;
+}
+
+.visible-section {
+    max-height: 2000px; /* Suficiente altura para el contenido renderizado */
+    opacity: 1;
+    transform: translateY(0);
     margin-top: 30px;
-    background: white;
+    transition: 
+        max-height 1s ease,
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* =========================
+   COMPONENTES ESPECÍFICOS
+========================= */
+
+#trend-message {
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
+    background: rgba(255,255,255,.05);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+#metrics-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.metric-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    padding: 20px;
+    border-radius: 16px;
+    transition:
+        transform .3s ease,
+        background .3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255,255,255,.12);
+}
+
+.metric-card h3 {
+    margin-bottom: 10px;
+}
+
+.metric-card p {
+    text-align: left;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.chart-container {
+    background: rgba(255,255,255,.96);
+    border-radius: 24px;
+    padding: 25px;
+    min-height: 600px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.12);
+    position: relative;
+}
+
+canvas {
+    margin-top: 20px;
+}
+
+#table-section {
+    max-height: 600px;
+    overflow-y: auto;
 }
 
 table {
@@ -32,16 +285,136 @@ table {
     border-collapse: collapse;
 }
 
-th,
-td {
-    border: 1px solid #ddd;
-    padding: 10px;
+thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 th {
-    background-color: #eee;
+    background: rgba(255,255,255,.12);
+    backdrop-filter: blur(15px);
+    padding: 15px;
+    text-align: left;
 }
 
-canvas {
-    width: 100%;
+td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+tbody tr {
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+tbody tr:hover {
+    background: rgba(255,255,255,.08);
+    transform: scale(1.01);
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.25);
+    border-radius: 999px;
+}
+
+/* =========================
+   KEYFRAMES
+========================= */
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes floatBackground {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-40px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   MEDIA QUERIES (RESPONSIVE)
+========================= */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    button {
+        width: 100%;
+        padding: 16px;
+    }
+
+    #metrics-container {
+        grid-template-columns: 1fr;
+    }
+
+    .metric-card {
+        width: 100%;
+    }
+
+    .chart-container {
+        min-height: 400px;
+        padding: 15px;
+    }
+
+    #table-section {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 450px;
+    }
+
+    #hero {
+        padding: 20px;
+    }
+
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+
+    #hero p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .hero-loaded {
+        min-height: 35vh !important;
+    }
+    
+    .hero-loaded h1 {
+        font-size: 1.8rem;
+    }
 }
